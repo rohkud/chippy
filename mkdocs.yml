@@ -3,6 +3,8 @@ site_url: https://rohkud.github.io/chippy/
 
 theme:
   name: material
+  features:
+    - content.code.copy
 
 nav:
   - Home: index.md
