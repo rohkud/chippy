@@ -11,6 +11,13 @@ You will need:
 - A Java Development Kit (JDK)
 - Network access to fetch Git submodules and Scala dependencies
 
+## Clone the repository
+
+```bash
+git clone https://github.com/ucb-substrate/chippy.git
+cd chippy
+```
+
 ## Planned topics
 - local package publishing
 - creating a minimal project
