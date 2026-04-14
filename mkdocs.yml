@@ -1,0 +1,9 @@
+site_name: Chippy Documentation
+site_url: https://rohkud.github.io/chippy/
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
