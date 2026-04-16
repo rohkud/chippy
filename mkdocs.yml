@@ -9,3 +9,9 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rohkud/chippy
+      name: View on GitHub
