@@ -1,7 +1,7 @@
 # Getting Started
 
 ## Goal
-Set up Chippy locally and run a minimal example.
+Set up Chippy locally
 
 ## Prerequisites
 
