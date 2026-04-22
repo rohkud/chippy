@@ -18,6 +18,7 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+  - Using Chippy as a Dependency: using-packages.md
 
 extra:
   social:
