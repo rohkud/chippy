@@ -5,6 +5,10 @@ Chippy is a modular framework for SoC design and testing that supports lighter-w
 ## Start here
 - [Getting Started](getting-started.md)
 
+## Repository Links
+
+- [Chippy Repository](https://github.com/ucb-substrate/chippy)
+
 ## Planned sections
 - Tutorials
 - Build flows
