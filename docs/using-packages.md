@@ -26,7 +26,7 @@ Export your credentials in your terminal:
 export COURSIER_CREDENTIALS="maven.pkg.github.com <YOUR_USERNAME>:<YOUR_PAT>"
 ```
 !!! tip
-    Replace <YOUR_USERNAME> with your GitHub username and <YOUR_PAT> with your Personal Access Token.
+    Replace `<YOUR_USERNAME>` with your GitHub username and `<YOUR_PAT>` with your Personal Access Token.
 
 ## 3. Add Dependency
 
