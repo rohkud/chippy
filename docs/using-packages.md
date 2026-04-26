@@ -37,10 +37,30 @@ def mvnDeps = Seq(
 )
 ```
 
-## 4. Run
+## 4. Example Usage
+To verify the setuup, you can test using this minimal example
+```scala
+import org.chipsalliance.diplomacy.lazymodule.LazyModule
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val x: Option[LazyModule] = None
+    println("Successfully imported diplomacy: " + x)
+  }
+}
+```
+
+
+!!! note
+    This example uses `diplomacy`, but the same process applies to other published Chippy modules such as `rocketchip`, `testchipip`, or `constellation`. The dependency declaration and import path will differ depending on the module.
+
+## 5. Run
 After you have created your Scala file, run it with:
 ```bash
 ./mill test.run
 ```
 
-### TODO: Example and Notes
+!!! success "Expected Output for the Example Above"
+    ```text
+    Successfully imported diplomacy: None
+    ```
