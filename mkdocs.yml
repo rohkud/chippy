@@ -14,7 +14,7 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
-        
+
 markdown_extensions:
   - admonition
   - pymdownx.details
@@ -24,6 +24,7 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Using Chippy as a Dependency: using-packages.md
+  - Publishing to GitHub Packages: publishing-github-packages.md
 
 extra:
   social:
