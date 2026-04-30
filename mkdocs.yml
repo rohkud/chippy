@@ -27,7 +27,9 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Using Chippy as a Dependency: using-packages.md
-  - Publishing to GitHub Packages: publishing-github-packages.md
+  - Publishing to GitHub Packages:
+      - Overview: publishing-github-packages.md
+      - Available Packages: available-packages.md
 
 extra:
   social:
