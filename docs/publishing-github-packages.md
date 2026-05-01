@@ -26,15 +26,20 @@ A successful local publish will place artifacts in `~/.ivy2/local`
 ## 2. Configure GitHub Actions
 Create the GitHub workflow file, `.github/workflows/publish.yml`
 
-Add this workflow to `.github/workflows/publish.yml` to publish all eligible Chippy packages:
+Add this workflow to `.github/workflows/publish.yml` to enable publishing a specific Chippy package:
 ```yml
-name: Publish Chippy packages
+name: Publish Chippy package
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
+    inputs:
+      module:
+        description: "Module to publish, e.g. rocketchip.dependencies.diplomacy, chippy, rocketchip. Look at documentation for more details: https://rohkud.github.io/chippy/available-packages/"
+        required: true
+        default: rocketchip.dependencies.diplomacy
+      version:
+        description: "Version to publish, e.g. 3.0.0"
+        required: true
 
 permissions:
   contents: read
@@ -54,19 +59,26 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: "17"
 
       - name: Make Mill executable
         run: chmod +x ./mill
 
-      - name: Publish all Chippy packages to GitHub Packages
+      - name: Set module and version
+        run: |
+          echo "MODULE=${{ github.event.inputs.module }}" >> $GITHUB_ENV
+          echo "CHIPPY_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+
+      - name: Publish selected module
         env:
           MILL_MAVEN_USERNAME: ${{ github.actor }}
           MILL_MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ./mill mill.javalib.MavenPublishModule/ \
+            ./mill mill.javalib.MavenPublishModule/ \
+            --publishArtifacts "$MODULE.publishArtifacts" \
             --releaseUri https://maven.pkg.github.com/rohkud/chippy-forked \
             --snapshotUri https://maven.pkg.github.com/rohkud/chippy-forked
+
 ```
 
 ## 3. Run the Workflow
@@ -76,22 +88,46 @@ git add .github/workflows/publish.yml
 git commit -m "Add GitHub Packages publishing workflow"
 git push origin main
 ```
-Then run the workflow manually:
+You can now trigger publishing in two ways:
 
-1. Go to the GitHub repository.
+---
+
+### Option A: GitHub Web UI
+
+1. Go to the repository.
 2. Open the **Actions** tab.
-3. Select **Publish Chippy packages**.
+3. Select **Publish Chippy package**.
 4. Click **Run workflow**.
+5. Enter:
 
-## 4. Versioning
-GitHub packages will reject publishing the same package version multiple times, so increment the package version in your `build.mill` file before publishing again:
-```scala
-def publishVersion = "0.0.2"
+```text
+module: rocketchip.dependencies.diplomacy
+version: 3.0.0
 ```
-!!! warning
-    Always bump the version before republishing artifacts.
 
-## 5. Verifying Published Packages
+---
+
+### Option B: Command Line (GitHub CLI)
+
+Install the GitHub CLI (`gh`) and authenticate:
+
+```bash
+gh auth login
+```
+
+Then run:
+
+```bash
+gh workflow run "Publish Chippy package" \
+  --repo rohkud/chippy-forked \
+  -f module=rocketchip.dependencies.diplomacy \
+  -f version=3.0.0
+```
+
+!!! warning
+    Always bump the version before republishing artifacts, since GitHub packages will reject publishing the same package version multiple times.
+
+## 4. Verifying Published Packages
 After publishing, verify it by going to the repository's **Packages**. You should see published artifacts like:
 ```
 chippy_2.13
