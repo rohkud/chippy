@@ -15,7 +15,7 @@ Add the GitHub Packages repository to your `build.mill`:
 
 ```scala
 def repositories = Seq(
-  "https://maven.pkg.github.com/rohkud/chippy-forked"
+  "https://maven.pkg.github.com/ucb-substrate/chippy"
 )
 ```
 
@@ -38,7 +38,7 @@ def mvnDeps = Seq(
 ```
 
 ## 4. Example Usage
-To verify the setuup, you can test using this minimal example
+To verify the setup, you can test using this minimal example
 ```scala
 import org.chipsalliance.diplomacy.lazymodule.LazyModule
 
