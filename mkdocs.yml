@@ -30,6 +30,7 @@ nav:
   - Publishing to GitHub Packages:
       - Overview: publishing-github-packages.md
       - Available Packages: available-packages.md
+  - API Documentation: api-docs.md
 
 extra:
   social:

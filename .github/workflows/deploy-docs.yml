@@ -1,0 +1,70 @@
+name: Deploy documentation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out documentation repo
+        uses: actions/checkout@v4
+        with:
+          path: docs-site
+
+      - name: Check out Chippy source repo
+        uses: actions/checkout@v4
+        with:
+          repository: rohkud/chippy-forked
+          path: chippy-forked
+          submodules: recursive
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install MkDocs
+        run: |
+          pip install mkdocs-material
+
+      - name: Generate Scaladoc
+        working-directory: chippy-forked
+        run: |
+          chmod +x ./mill
+          ./mill __.docJar
+
+      - name: Copy Scaladoc into docs site
+        run: |
+          mkdir -p docs-site/docs/api
+          rm -rf docs-site/docs/api/*
+
+          find chippy-forked/out -name "*.jar" | grep docJar | while read jar; do
+            module=$(basename "$(dirname "$(dirname "$jar")")")
+            mkdir -p "docs-site/docs/api/$module"
+            unzip -q "$jar" -d "docs-site/docs/api/$module" || true
+          done
+
+      - name: Build MkDocs
+        working-directory: docs-site
+        run: |
+          mkdocs build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs-site/site
