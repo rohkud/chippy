@@ -65,6 +65,14 @@ jobs:
             unzip -q "$jar" -d "docs-site/docs/api/$module" || true
           done
 
+      - name: Show copied API docs
+        run: |
+          echo "Files under docs-site/docs/api:"
+          find docs-site/docs/api -maxdepth 5 -type f | sort | head -100
+
+          echo "Index files:"
+          find docs-site/docs/api -name "index.html" | sort
+
       - name: Build MkDocs
         working-directory: docs-site
         run: |
