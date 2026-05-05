@@ -21,12 +21,46 @@ def repositories = Seq(
 
 ## 2. Authentication
 
-Export your credentials in your terminal:
-```bash
-export COURSIER_CREDENTIALS="maven.pkg.github.com <YOUR_USERNAME>:<YOUR_PAT>"
-```
+GitHub Packages requires authentication when downloading Maven dependencies. Here are two common ways to provide credentials to Coursier.
+
+=== "Temporary environment variable"
+
+    Export your credentials in your terminal:
+
+    ```bash
+    export COURSIER_CREDENTIALS="maven.pkg.github.com <YOUR_USERNAME>:<YOUR_PAT>"
+    ```
+
+    This applies only to the current terminal session.
+
+=== "Persistent credentials file"
+
+    Create a Coursier credentials file:
+
+    ```bash
+    mkdir -p ~/.coursier
+    nano ~/.coursier/credentials
+    ```
+
+    Add:
+
+    ```text
+    maven.pkg.github.com <YOUR_USERNAME>:<YOUR_PAT>
+    ```
+
+    Restrict file permissions:
+
+    ```bash
+    chmod 600 ~/.coursier/credentials
+    ```
+
+    This avoids re-exporting credentials every new terminal session.
+
+    !!! warning
+        Never commit your Personal Access Token or credentials file to a repository.
+
 !!! tip
-    Replace `<YOUR_USERNAME>` with your GitHub username and `<YOUR_PAT>` with your Personal Access Token.
+    Replace `<YOUR_USERNAME>` with your GitHub username and `<YOUR_PAT>` with a Personal Access Token that has `read:packages`.
 
 ## 3. Add Dependency
 
