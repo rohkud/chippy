@@ -30,10 +30,5 @@ TODO: Use github packages
 ./mill __.publishLocal
 ```
 
-## Planned topics
-- TODO: GITHUB PACKAGES!!
-- creating a minimal project
-- running a simple simulation
-
 ## Next steps
 This page will become the main quickstart for new users.

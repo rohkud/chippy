@@ -11,7 +11,5 @@ Chippy is a modular framework for SoC design and testing that supports lighter-w
 - [Chippy Project Fork](https://github.com/rohkud/chippy-forked)
 
 ## Planned sections
-- Tutorials
-- Build flows
-- Package overview
-- API reference
+- creating a minimal project
+- running a simple simulation
