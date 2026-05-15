@@ -1,4 +1,4 @@
 # chippy
-144
+EECS 144 Final Project
 
-https://rohkud.github.io/chippy/
+Documentation Site viewable at: https://rohkud.github.io/chippy/
